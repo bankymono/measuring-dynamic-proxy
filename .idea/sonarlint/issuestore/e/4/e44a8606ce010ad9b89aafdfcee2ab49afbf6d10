@@ -1,6 +1,11 @@
 
-]
-java:S1220""Move this file to a named package.8ëò­ªª2J$9b709a83-c5a4-4ed8-97a7-3ce4821c94e9
-r	java:S106"+Replace this use of System.out by a logger.(Ú÷úøÿÿÿÿ8ƒó­ªª2J$faf23685-ade0-464c-9dad-d3038a00b526
-m	java:S106"+Replace this use of System.out by a logger.(¶ğ›õ8‰ó­ªª2J$5c34b596-1737-4795-88ba-c57572365b3f
-m	java:S106"+Replace this use of System.out by a logger.(Á¤”Æ8ˆ—®ªª2J$d8211786-b0ae-44ed-a1b0-2683f7a86a01
+7
+java:S1220""Move this file to a named package.8‘Ñû«ª2
+L	java:S106"+Replace this use of System.out by a logger.(Ú÷úøÿÿÿÿ8 Ñû«ª2
+G	java:S106"+Replace this use of System.out by a logger.(¶ğ›õ8¤Ñû«ª2
+G	java:S106#"+Replace this use of System.out by a logger.(Á¤”Æ8©Ñû«ª2
+G	java:S1069"+Replace this use of System.out by a logger.(û¾ù8³Ñû«ª2
+L	java:S106?"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8¶Ñû«ª2
+G	java:S106A"+Replace this use of System.out by a logger.(ÄÅöş8¿Ñû«ª2
+n
+java:S3457A"Q%n should be used in place of \n to produce the platform-specific line separator.(ÄÅöş8ÕÑû«ª2

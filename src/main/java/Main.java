@@ -3,11 +3,15 @@ import external.HttpClient;
 import external.impl.DatabaseReaderImpl;
 import external.impl.HttpClientImpl;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-        HttpClient httpClient = new HttpClientImpl();
-        DatabaseReader databaseReader = new DatabaseReaderImpl();
+        HttpClient httpClient = createProxy(new HttpClientImpl());
+        DatabaseReader databaseReader = createProxy(new DatabaseReaderImpl());
 
         useHttpClient(httpClient);
         useDatabaseReader(databaseReader);
@@ -29,5 +33,39 @@ public class Main {
         String [] data = databaseReader.readRow("SELECT * from GamesTable");
 
         System.out.println(String.format("Received %s", String.join(",", data)));
+    }
+
+    public static <T> T createProxy(Object originalObject) {
+        Class<?>[] interfaces = originalObject.getClass().getInterfaces();
+
+        TimeMeasuringProxyHandler timeMeasuringProxyHandler = new TimeMeasuringProxyHandler(originalObject);
+
+        return (T) Proxy.newProxyInstance(originalObject.getClass().getClassLoader(), interfaces, timeMeasuringProxyHandler);
+    }
+
+    public static class TimeMeasuringProxyHandler implements InvocationHandler {
+        private final Object originalObject;
+
+        public TimeMeasuringProxyHandler(Object originalObject) {
+            this.originalObject = originalObject;
+        }
+
+        @Override
+        public Object invoke(Object o, Method method, Object[] args) throws Throwable {
+            Object result;
+
+            System.out.println(String.format("Measuring Proxy - Before Executing method : %s", method.getName()));
+
+            long startTime = System.currentTimeMillis();
+            result = method.invoke(originalObject,args);
+            long endTime = System.currentTimeMillis();
+
+            System.out.println();
+
+            System.out.println(String.format("Measuring Proxy - Executing of %s() took %dms \n", method.getName(),
+                    endTime - startTime));
+
+            return result;
+        }
     }
 }
